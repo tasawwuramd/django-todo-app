@@ -1,0 +1,29 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+</head>
+
+<body>
+    {% if user.is_authenticated %}
+    Welcome {{ user.username }}
+    <!-- <form action="/logout/" method="POST"> -->
+    <form action="{% url 'logoutuser' %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+    {% else %}
+    <a href="{% url 'loginuser' %}">Login</a>
+    <a href="{% url 'signupuser' %}">SignUp</a>
+    {% endif %}
+    <br>
+    <br>
+    {% block content %}
+    {% endblock %}
+
+</body>
+
+</html>
